@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// Encrypt passwrod using bcrypt
+// Encrypt password using bcrypt
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
@@ -53,7 +53,7 @@ UserSchema.methods.getSignedJwtToken = function () {
   });
 };
 
-// Match user eneterd password to hashed password in database
+// Match user entered password to hashed password in database
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
